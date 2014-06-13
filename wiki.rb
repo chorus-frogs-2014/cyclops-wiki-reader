@@ -6,23 +6,19 @@ class Controller
   end
 
   def user_interface
-    toggle = true
-    while toggle
-      topic = prompt
-      if topic.empty?
-        puts "end of program"
-        return
-      end
-      summary = model_runner(topic)
-
-      output(summary)
+    user_query = Topic.new(get_topic)
+    user_query.get_summary
+    until user_query.topic.empty?
+      topic = user_query.summary
+      output(topic)
+      user_query = Topic.new(get_topic)
+      user_query.get_summary
     end
   end
 
-  def prompt
+  def get_topic
     puts "What wikipedia summary would you like to see?, return to exit"
     topic = gets.chomp
-    topic
   end
 
   def output(output_string)
@@ -32,4 +28,4 @@ end
 
 controller = Controller.new
 
-
+# Controller.run
