@@ -20,17 +20,6 @@ class Topic
   end
 
   def json_sanitizer (wiki_entry)
-    begin
-      @summary = Sanitize.clean(wiki_entry["query"]["pages"][wiki_entry["query"]["pages"].keys[0]]["extract"])
-      if @summary.nil? || @summary.include?("This is a redirect") || @summary.empty?
-        puts "Error: Wikipedia entry not found. Please check your spelling."
-      elsif @summary.include?("refers to:") || @summary.include?("refer to:")
-        puts "Error: Disambiguation page retreived."
-      else
-        @summary
-      end
-    rescue
-      puts "Error: Cannot retreive Wikipedia entry. Please check your spelling."
-    end
+    @summary = Sanitize.clean(wiki_entry["query"]["pages"][wiki_entry["query"]["pages"].keys[0]]["extract"])
   end
 end
