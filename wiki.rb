@@ -9,15 +9,14 @@ class Controller
     user_query = Topic.new(get_topic)
     user_query.get_summary
     until user_query.topic.empty?
-      topic = user_query.summary
-      output(topic)
+      output(user_query.summary)
       user_query = Topic.new(get_topic)
       user_query.get_summary
     end
   end
 
   def get_topic
-    puts "What wikipedia summary would you like to see?, return to exit"
+    puts "What wikipedia summary would you like to see? Press return to exit."
     topic = gets.chomp
   end
 
@@ -27,5 +26,3 @@ class Controller
 end
 
 controller = Controller.new
-
-# Controller.run
